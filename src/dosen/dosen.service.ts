@@ -4,7 +4,7 @@ import { UpdateDosenDto } from './dto/update-dosen.dto';
 import { Dosen } from './entities/dosen.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class DosenService {
   constructor(@InjectRepository(Dosen) private readonly dosenRepository:Repository<Dosen>){}
@@ -12,19 +12,21 @@ export class DosenService {
     const dosen:Dosen = new Dosen();
     dosen.name = createDosenDto.name ?? "";
     dosen.alamat = createDosenDto.alamat ?? "";
-    dosen.password = createDosenDto.password ?? "";
+    const salt = bcrypt.genSaltSync(10);
+    const hash =  bcrypt.hashSync(createDosenDto.password ?? "", salt);
+    dosen.password = hash;
     dosen.age = createDosenDto.age ?? 0;
     return this.dosenRepository.save(dosen);
   }
-
+  
   findAll():Promise<Dosen[]> {
     return this.dosenRepository.find();
-  }
+  };
 
   findOne(id: number) : Promise <Dosen | null> {
     return this.dosenRepository.findOne({
       where : {id}
-    })
+    });
   };
 
   update(id: number, updateDosenDto: UpdateDosenDto):Promise<Dosen> {
@@ -35,9 +37,12 @@ export class DosenService {
     dosen.password = updateDosenDto.password ?? "";
     dosen.age = updateDosenDto.age ?? 0;
     return this.dosenRepository.save(dosen);
-  }
+  };
 
   remove(id: number) : Promise<{affected?:number | null} > {
     return this.dosenRepository.delete({id});
+  }
+  hello():string{
+    return "hello";
   }
 }
