@@ -1,6 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
+// file ini digunakan untuk membuat entity struktur table
 export class User {
     @PrimaryGeneratedColumn()
     id:number;

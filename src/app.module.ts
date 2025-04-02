@@ -8,22 +8,26 @@ import 'dotenv/config';
 import { User } from './user/entities/user.entity';
 import { DosenModule } from './dosen/dosen.module';
 import { Dosen } from './dosen/entities/dosen.entity';
+import { KelasModule } from './kelas/kelas.module';
+import { Kelas } from './kelas/entities/kelas.entity';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type : 'postgres',
+      type : process.env.DB_TYPE as 'postgres',
       host : 'localhost',
       port: 5432,
-      username : 'postgres',
-      password : 'postgres',
-      database :'todolist',
-      entities:  [User,Dosen],
+      username : process.env.DB_USERNAME,
+      password : process.env.DB_PASSWORD,
+      database :process.env.DATABASE,
+      entities:  [User,Dosen,Kelas],
       logging: true,
       synchronize : true
     }),
     FilekitaModule,
     UserModule,
-    DosenModule
+    DosenModule,
+    KelasModule
   ],
   controllers: [AppController],
   providers: [AppService],
