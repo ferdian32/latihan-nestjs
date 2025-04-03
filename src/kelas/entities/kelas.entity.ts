@@ -11,4 +11,4 @@ export class Kelas{
     jurusan:string;
     @Column({type:'int',nullable:false,default:0})
     angkatan:number;
-}
+};

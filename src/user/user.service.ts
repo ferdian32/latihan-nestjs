@@ -7,14 +7,15 @@ import { User } from './entities/user.entity';
 @Injectable()
 export class UserService {
   constructor(@InjectRepository(User) private readonly userRepository:Repository<User>){}
-  create(createUserDto: CreateUserDto):Promise<User> {
+   create(createUserDto: CreateUserDto, file: Express.Multer.File):Promise<User> {
     const user:User = new User();
     user.name = createUserDto.name;
     user.email = createUserDto.email;
     user.age = createUserDto.age;
     user.password = createUserDto.password;
+    user.image = file ? file.filename :  '';
     return this.userRepository.save(user);
-  }
+  };
 
   findAll(): Promise<User []> {
     return this.userRepository.find();

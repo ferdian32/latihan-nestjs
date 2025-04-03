@@ -42,7 +42,4 @@ export class DosenService {
   remove(id: number) : Promise<{affected?:number | null} > {
     return this.dosenRepository.delete({id});
   }
-  hello():string{
-    return "hello";
-  }
 }
