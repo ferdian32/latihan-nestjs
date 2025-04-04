@@ -40,4 +40,7 @@ export class UserService {
   remove(id: number) :Promise <{affected?:number | null}>{
     return this.userRepository.delete({id});
   }
+  hello() {
+    return "hello";
+  }
 }

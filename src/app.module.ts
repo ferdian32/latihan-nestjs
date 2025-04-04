@@ -10,6 +10,8 @@ import { DosenModule } from './dosen/dosen.module';
 import { Dosen } from './dosen/entities/dosen.entity';
 import { KelasModule } from './kelas/kelas.module';
 import { Kelas } from './kelas/entities/kelas.entity';
+import { MahasiswaModule } from './mahasiswa/mahasiswa.module';
+import { Mahasiswa } from './mahasiswa/entities/mahasiswa.entity';
 
 @Module({
   imports: [
@@ -20,14 +22,15 @@ import { Kelas } from './kelas/entities/kelas.entity';
       username : process.env.DB_USERNAME,
       password : process.env.DB_PASSWORD,
       database :process.env.DATABASE,
-      entities:  [User,Dosen,Kelas],
+      entities:  [User,Dosen,Kelas,Mahasiswa],
       logging: true,
       synchronize : true
     }),
     FilekitaModule,
     UserModule,
     DosenModule,
-    KelasModule
+    KelasModule,
+    MahasiswaModule
   ],
   controllers: [AppController],
   providers: [AppService],
