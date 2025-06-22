@@ -12,6 +12,7 @@ import { KelasModule } from './kelas/kelas.module';
 import { Kelas } from './kelas/entities/kelas.entity';
 import { MahasiswaModule } from './mahasiswa/mahasiswa.module';
 import { Mahasiswa } from './mahasiswa/entities/mahasiswa.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { Mahasiswa } from './mahasiswa/entities/mahasiswa.entity';
     UserModule,
     DosenModule,
     KelasModule,
-    MahasiswaModule
+    MahasiswaModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
